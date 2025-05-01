@@ -1,7 +1,8 @@
+// app/layout.tsx or layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "./ui/components/Footer";
 import Header from "./ui/components/Header";
+import Footer from "./ui/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,22 +21,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={"flex h-screen flex-col bg-red overflow-y-auto"}
-        style={{
-          scrollbarWidth: 'none'
-        }}
-      >
-        <div>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="flex min-h-screen flex-col text-gray-900">
+        <header className="w-full fixed top-0 left-0 z-50 bg-white">
           <Header />
-        </div>
-        <div className="h-screen bg-red">
+        </header>
+
+]        <main className="flex-1 pt-[80px]">
           {children}
-        </div>
-        <div>
+        </main>
+
+        <footer className="bg-black text-white">
           <Footer />
-        </div>
+        </footer>
       </body>
     </html>
   );
