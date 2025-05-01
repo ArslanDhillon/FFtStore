@@ -22,12 +22,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="flex min-h-screen flex-col text-gray-900">
+      <body className="min-h-screen flex flex-col text-gray-900 overflowy-auto">
+        {/* Fixed Header */}
         <header className="w-full fixed top-0 left-0 z-50 bg-white">
           <Header />
         </header>
 
-]        <main className="flex-1 pt-[80px]">
+        {/* Push content below the fixed header */}
+        <main className="pt-[40px] flex-1">
           {children}
         </main>
 
@@ -38,3 +40,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
