@@ -1,20 +1,34 @@
-import React from 'react'
-import ProductsList from '../ui/components/collections/ProductsList'
+// 'use client'
 
-function page() {
+import React from "react";
+import ProductsList from "../ui/components/collections/ProductsList";
+import FiltersComponent from "../ui/components/filters/FiltersComponent";
+
+export default function Page() {
+
+  
   return (
-    <div className='w-full flex flex-row items-center pt-[50px]'>
-      <div className='flex w-3/12 border'>
-        Filters
-
-      </div>
-
-      <div className='w-9/12 flex'>
-        <ProductsList />
-      </div>
+    <div className="flex h-full pt-10 " style={{
+      overflowY:'hidden'
+    }}
       
-    </div>
-  )
-}
+    >
+      {/* Sidebar (filters) */}
+      <aside className="w-3/12"
+      // style={{backgroundColor:'red'}}
+      >
+        <div className="sticky top-0">
+          <FiltersComponent />
+        </div>
+      </aside>
 
-export default page
+      {/* Main area (products) */}
+      <section
+        className="w-9/12 overflow-y-auto"
+        style={{ scrollbarWidth: "none" }}
+      >
+        <ProductsList />
+      </section>
+    </div>
+  );
+}

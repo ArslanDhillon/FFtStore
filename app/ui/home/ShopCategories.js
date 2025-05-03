@@ -1,27 +1,26 @@
 'use client';
+import { getCategories, getProducts } from '@/api/Apis';
+import {useState,useEffect} from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-const categories = [
-    {
-        label: 'SHOP MEN',
-        image: '/icons/shopMenImage.webp',
-        href: '/collections',
-    },
-    {
-        label: 'SHOP KIDS',
-        image: '/icons/shopKidsImage.webp',
-        href: '/collections',
-    },
-    {
-        label: 'SHOP WOMEN',
-        image: '/icons/shopWomenImage.webp',
-        href: '/collections',
-    },
-];
 
 export default function ShopCategories() {
+
+
+    const [categories,setCategoris] = useState([])
+
+    useEffect(() => {
+    getCat()
+    }, [])
+
+    const getCat =async () =>{
+        let cat = await getCategories()
+
+        setCategoris(cat)
+    }
+
 
     const router = useRouter()
     return (
