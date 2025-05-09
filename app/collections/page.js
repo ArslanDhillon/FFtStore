@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 
 import React from "react";
 import ProductsList from "../ui/components/collections/ProductsList";
@@ -8,7 +8,7 @@ export default function Page() {
 
   
   return (
-    <div className="flex h-full pt-10 " style={{
+    <div className="flex h-full min-h-[90vh] pt-10 " style={{
       overflowY:'hidden'
     }}
       

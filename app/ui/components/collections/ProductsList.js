@@ -1,5 +1,5 @@
-// 'use client';
-import { prisma } from '@/lib/prisma';
+'use client';
+import { useState, useEffect } from 'react';
 import { ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,120 +8,34 @@ import Link from 'next/link';
 const filters = ['PRICE', 'SIZE', 'COLOR', 'SALE', 'FITS', 'SORT'];
 
 
-// const products = [
-//     {
-//         title: 'BUTTON-FRONT CROPPED TOP',
-//         price: 1749,
-//         oldPrice: 2499,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'EMBROIDERED POLO',
-//         price: 1749,
-//         oldPrice: 2499,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'STRIPED SHORTS',
-//         price: 1259,
-//         oldPrice: 1799,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-//     {
-//         title: 'ALL OVER PRINTED T-SHIRT',
-//         price: 1329,
-//         oldPrice: 1899,
-//         img: '/icons/shopWomenImage.webp',
-//     },
-// ];
 
-export default async function ProductsList() {
+export default function ProductsList({ categoryId }) {
+    const [products, setProducts] = useState([]);
 
-    const products = await prisma.product.findMany()
+    useEffect(() => {
+
+        const fetchData = async () => {
+            console.log('trying to get list',)
+            let cat = localStorage.getItem('selectedCategory');
+            if (cat) {
+                let selectedCat = JSON.parse(cat);
+                console.log('selectedCat', selectedCat)
+                let path = `/api/products${selectedCat ? `?categoryId=${selectedCat.id}` : ''}`
+                console.log('path', path)
+                const res = await fetch(path);
+                console.log('res', res)
+                // return
+                const data = await res.json();
+                console.log('data', data)
+                setProducts(data);
+            }else{
+                console.log('no selected category found', )
+            }
+        };
+
+        fetchData();
+    }, [categoryId]);
+
 
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
