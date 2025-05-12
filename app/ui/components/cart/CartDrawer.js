@@ -3,6 +3,7 @@ import { X } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import EmptyCart from './EmptyCart'
+import { useRouter } from 'next/navigation'
 
 function CartDrawer({
     open,
@@ -10,6 +11,7 @@ function CartDrawer({
     handleOnClick
 }) {
 
+    const router = useRouter()
     const [qty, setQty] = useState(2);
 
     const handleQty = (type) => {
@@ -87,7 +89,12 @@ function CartDrawer({
                     <p className="text-xs text-gray-500 mb-4">
                         Taxes, discounts and <span className="underline">shipping</span> calculated at checkout.
                     </p>
-                    <button className="w-full bg-gray-800 text-white py-3 uppercase tracking-wider hover:bg-black transition">
+                    <button className="w-full bg-gray-800 text-white py-3 uppercase tracking-wider hover:bg-black transition"
+                        onClick={() => {
+                            router.push('/checkouts')
+                        }}
+                    >
+
                         Checkout
                     </button>
                 </div>

@@ -21,7 +21,7 @@ export default function MenuDrawer({
         }}
         PaperProps={{
           sx: {
-            width: "35%", // Adjust width as needed
+            width: "30%", // Adjust width as needed
             boxShadow: 3, // Light shadow
            
             backgroundColor: "white", // Ensure it's visible
@@ -52,8 +52,8 @@ export default function MenuDrawer({
           <Image src="/icons/mainLogo.png" alt="logo" width={120} height={60} />
         </div>
 
-        <div className="flex flex-col gap-4 px-4 py-6">
-          <div className="flex flex-row gap-6 text-sm font-medium border-t border-b w-full py-3">
+        <div className="flex flex-col gap-4 px-0 py-6">
+          <div className="flex flex-row gap-6 text-sm font-medium border-t border-b w-full items-center justify-center py-3">
             <Link href="/collections" className="hover:text-orange-500">MEN</Link>
             <Link href="/collections" className="hover:text-orange-500">WOMEN</Link>
             <Link href="/collections" className="font-bold">KIDS</Link>
@@ -62,7 +62,7 @@ export default function MenuDrawer({
 
           {/* <hr className="my-2" /> */}
 
-          <div className="flex flex-col gap-2 text-[15px] font-semibold text-zinc-700">
+          <div className="flex flex-col gap-2 text-[15px] text-zinc-700 px-6" style={{fontWeight:'500'}}>
             <div className="flex justify-between items-center">
              NEW ARRIVALS  {/* <span className="bg-orange-400 text-white text-xs px-2 py-0.5 rounded-md">UPTO 50% OFF</span> */}
             </div>
